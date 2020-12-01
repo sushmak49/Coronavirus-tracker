@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CoronaVirus Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <h1>CoronaVirus Tracker Application</h1>
+    <p>This application lists total cases reported across globe.</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+        <p class="lead">Total cases reported as of today</p>
+        <hr class="my-4">
+        <p> Total cases reported since yesterday :
+            <span th:text="${totalReportedCasesSinceYesterday}"></span>
+        </p>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hey User!</strong> Please check this link for data source.
+        <span><a href="https://github.com/CSSEGISandData/COVID-19">Github link</a></span>
+    </div>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>STATE</th>
+            <th>COUNTRY</th>
+            <th>LATEST TOTAL CASES</th>
+            <th>CHANGES SINCE LAST DAY</th>
+        </tr>
+        <tr th:each="location : ${locationStats}">
+            <td th:text="${location.getState()}"></td>
+            <td th:text="${location.getCountry()}"></td>
+            <td th:text="${location.getLatestTotalCases()}"></td>
+            <td th:text="${location.getDiffFromPreviousDay()}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>
